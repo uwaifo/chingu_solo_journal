@@ -1,0 +1,1 @@
+# chingu_solo_journal
