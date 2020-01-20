@@ -1,17 +1,25 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { CreateDateColumn, Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
 import { Field, ObjectType } from "type-graphql";
-
+import {Journal} from "./Journal"
 @ObjectType()
-@Entity()
+@Entity("user")
 export class User extends BaseEntity {
   @Field()
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-  @Field()
+  @Field() 
   @Column("text", { unique: true })
   email: string;
 
   @Column()
   password: string;
+
+  @OneToMany(type => Journal, journal => journal.user)
+  journals: Journal[];
+
+  @Field()
+  @CreateDateColumn()
+  createdOn: string
+
 }
