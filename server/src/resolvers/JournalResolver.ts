@@ -58,12 +58,13 @@ export class JournalResolver {
   }
 
   @Query(() => [Journal])
-  @UseMiddleware(isAuth)
+  //@UseMiddleware(isAuth)
   journals() {
     return Journal.find();
   }
 
   @Query(() => Journal)
+  @UseMiddleware(isAuth)
   journal(@Arg("id", () => String) id: string) {
     return Journal.findOne(id);
   }
