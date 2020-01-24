@@ -12,8 +12,9 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 //import { } from "react-router-dom"
 import { BrowserRouter } from "react-router-dom";
+import { graphql } from "graphql";
 
- 
+
 
 
 ReactDOM.render(

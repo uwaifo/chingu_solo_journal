@@ -2,7 +2,7 @@ import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { Container, Row, Col, Form } from "react-bootstrap";
-import HeaderSection from "./Header";
+import HeaderSection from "../Site/Header";
 import { JournalEntry } from "./JournalEntry";
 
 //
@@ -36,9 +36,43 @@ export const Journals: React.FC = () => {
     <>
       <HeaderSection />
       <JournalEntry onSubmit={() => {}} />
-      <div>
-        <p></p>
+      <div className="container">
+        <div className="row">
+          {data.journals.map((journal: journalType) => (
+            <div className="col-md-4" key={journal.id}>
+              <div className="card">
+                <div className="card-header">
+                  <h5 className="mb-0">{journal.title}</h5>
+                </div>
+                <div className="card-body">
+                  <p className="card-text">{journal.body}</p>
+                </div>
+                <div className="card-header">
+                  <div className="row">
+                    <div className="col">
+                      <a href="#">Edit</a>
+                    </div>
+                    <div className="col">
+                      <a className="text-danger" href="#">
+                        Delete
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <div className="mb-3"></div>
+            </div>
+          ))}
+        </div>
       </div>
+    </>
+  );
+};
+
+export default Journals;
+/*
+      
 
       <div className="container">
         <div className="row">
@@ -98,21 +132,4 @@ export const Journals: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
-  );
-};
-
-export default Journals;
-/*
-      <nav class="navbar navbar-light navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand" href="#"><strong>Digital Journal</strong> | Create A Note</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link text-primary" href="#">Log in</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link text-primary" href="#">Sign up</a></li>
-                </ul>
-        </div>
-        </div>
-    </nav>
 */
