@@ -8,7 +8,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { HeaderSection } from "./componants/Site/Header";
+import HeaderSection from "./componants/Site/Header";
  import { Journals } from "./componants/Journal/Journals";
  
 const client = new ApolloClient({
@@ -34,8 +34,7 @@ const App = () => {
     <ApolloProvider client={client}>
       <Switch>
         <Route exact path="/" component={Journals} />
-        <Route path="/journals" component={Journals} />
-        </Switch>
+         </Switch>
     </ApolloProvider>
   );
 };

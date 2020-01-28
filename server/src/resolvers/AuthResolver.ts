@@ -62,6 +62,8 @@ export class AuthResolver {
     }
 
     ctx.req.session!.userId = user.id;
+    console.log(ctx.req.session);
+    console.log(ctx.req.sessionID);
 
     return { user };
   }

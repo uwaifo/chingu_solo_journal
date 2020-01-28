@@ -34,6 +34,7 @@ class JournalUpdateInput {
 @Resolver()
 export class JournalResolver {
   @Mutation(() => Journal)
+  @UseMiddleware(isAuth)
   async createJournal(
      @Arg("options", () => JournalInput) options: JournalInput
   ) {
@@ -42,6 +43,7 @@ export class JournalResolver {
   }
 
   @Mutation(() => Boolean)
+  @UseMiddleware(isAuth)
   async updateJournal(
     @Arg("id", () => String) id: string,
     @Arg("input", () => JournalUpdateInput) input: JournalUpdateInput
@@ -52,6 +54,7 @@ export class JournalResolver {
   }
 
   @Mutation(() => Boolean)
+  @UseMiddleware(isAuth)
   async deleteJournal(@Arg("id", () => String) id: string) {
     await Journal.delete({ id });
     return true;

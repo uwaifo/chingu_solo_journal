@@ -1,60 +1,86 @@
 ///
-import "bootstrap/dist/css/bootstrap.css";
-import { Formik } from "formik";
-import * as React from "react";
+import React, { useState } from "react";
+
 import { Button, Container, Form } from "react-bootstrap";
-import { JournalEditor } from "../Journal/JournalEditor";
-interface Values {
-  title: string;
-  body: string;
-}
+//import { JournalEditor } from "../Journal/JournalEditor";
+import { useMutation } from "@apollo/react-hooks";
+import { CREATE_JOURNAL } from "../../api/journal_entry_mutation";
 
-interface Props {
-  onSubmit: (values: Values) => void;
-}
+export const JournalEntry = (props: any) => {
+  const [values, setValues] = useState({
+    title: "",
+    body: ""
+  });
+  const handleChange = (e: any) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+  //
+  const [validated, setValidated] = useState(false);
 
-export const JournalEntry: React.FC<Props> = ({ onSubmit }) => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    if (form.checkValidity() == false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setValidated(true);
+    //console.log({ values });
+    addJournal();
+  };
+  const [addJournal, { loading }] = useMutation(CREATE_JOURNAL, {
+    update(proxy, result) {
+      //console.log(result);
+    },
+    variables: values
+  });
+
   return (
     <>
-      <Formik
-        initialValues={{ title: "", body: "" }}
-        onSubmit={values => {
-          onSubmit(values);
-        }}
-      >
-        {({ values, handleChange, handleBlur }) => (
-          <Container>
-            <Form>
-              <Form.Group controlId="title">
-                <Form.Label>Title:</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="title"
-                  placeholder="Enter Title"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.title}
-                />
-              </Form.Group>
+      <Container>
+        <Form onSubmit={handleSubmit} noValidate validated={validated}>
+          <Form.Group controlId="title">
+            <Form.Label>Title:</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="title"
+              placeholder="Enter Title"
+              onChange={handleChange}
+              value={values.title}
+            />
+          </Form.Group>
+          <Form.Group controlId="body">
+            <Form.Label>Body:</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows="3"
+              type="text"
+              name="body"
+              placeholder="Journal Entry"
+              onChange={handleChange}
+              value={values.body}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please enter a journal title
+            </Form.Control.Feedback>
 
-              <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Body:</Form.Label>
+            <Form.Text className="text-muted">
+              Use the form above to create a post. Make sure you fill the
+              required title and body fields and then press submit.
+            </Form.Text>
+            <Form.Control.Feedback type="invalid">
+              Please make a journal entry
+            </Form.Control.Feedback>
+          </Form.Group>
 
-                <JournalEditor />
-                <Form.Text className="text-muted">
-                  Use the form above to create a post. Make sure you fill the
-                  required title and body fields and then press submit.
-                </Form.Text>
-              </Form.Group>
-
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Form>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-          </Container>
-        )}
-      </Formik>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </Container>
+      <div className="mb-3"></div>
     </>
   );
 };

@@ -8,7 +8,7 @@ import { buildSchema } from "type-graphql";
 import { AuthResolver } from "./resolvers/AuthResolver";
 import { JournalResolver } from "./resolvers/JournalResolver";
 import {UserResolver} from "./resolvers/UserResolver"
-// I like to use redis for this: https://github.com/tj/connect-redis
+ // I like to use redis for this: https://github.com/tj/connect-redis
 const SQLiteStore = connectSqlite3(session);
 
 (async () => {

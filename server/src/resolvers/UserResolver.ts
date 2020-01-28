@@ -1,5 +1,6 @@
 import { Query, Arg, Resolver, UseMiddleware } from "type-graphql";
 import { User } from "../entity/User";
+//import {UserSession} from "../entity/UserSession"
 import { isAuth } from "../middleware/isAuth";
 
 
@@ -17,7 +18,8 @@ export class UserResolver {
   user(@Arg("id", () => String) id: string) {
     return User.findOne(id);
   }
-}
+
+ }
 
 
 /*
