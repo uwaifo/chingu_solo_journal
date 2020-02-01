@@ -32,6 +32,8 @@ export const JournalEntry = (props: any) => {
   const [addJournal, { loading }] = useMutation(CREATE_JOURNAL, {
     update(proxy, result) {
       //console.log(result);
+      window.location.href = "/";
+
     },
     variables: values
   });

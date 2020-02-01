@@ -12,7 +12,8 @@ import HeaderSection from "./componants/Site/Header";
  import { Journals } from "./componants/Journal/Journals";
  
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
+  //uri: "http://localhost:4000/graphql"
+  uri: "http://boiling-stream-06582.herokuapp.com/graphql"
 });
 /*
 client.query({

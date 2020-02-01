@@ -1,4 +1,4 @@
-import { ManyToOne, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,  BaseEntity } from "typeorm"
+import {  Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,  BaseEntity } from "typeorm"
 import {User} from "./User"
 import { Field, ObjectType } from "type-graphql"
 
@@ -21,7 +21,7 @@ export class Journal extends BaseEntity {
 
      
     @Field(() => User)
-    @ManyToOne(type => User, user => user.journals)
+    //@ManyToOne(type => User, user => user.journals)
     user: User;
     
 

@@ -1,6 +1,7 @@
 {
   "name": "myapi-with-auth",
   "version": "0.0.1",
+  "heroku-postbuild": "tsc",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.2",

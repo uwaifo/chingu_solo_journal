@@ -58,7 +58,7 @@ export const JournalListing = () => {
                   <h5 className="mb-0">{journal.title}</h5>
                 </div>
                 <div className="card-body">
-                  <p className="card-text">{journal.body}</p>
+                  <p className="card-text">{journal.body.substring(0,240)}</p>
                 </div>
                 <div className="card-header">
                   <div className="row">
